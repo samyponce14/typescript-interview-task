@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 import Modal from 'react-modal';
-import { IItem } from "~/services/getUserItems";
+import { IItem } from '~/services/getUserItems';
 import updateItem from '../../../../services/updateItem';
 import ItemIcon from './components/ItemIcon';
 
@@ -48,6 +48,7 @@ const UpdateModal: FC<IUpdateModal> = ({ item }) => {
                   password: newPass,
                 })
               }
+              setNewPass('');
               setShowModal(false);
             }}>Change</button>
           <button className="button ml-12px" onClick={() => {
