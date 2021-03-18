@@ -1,5 +1,5 @@
-import {FC, useState} from 'react';
-import {IItem} from "~/services/getUserItems";
+import { FC, useState } from 'react';
+import { IItem } from "~/services/getUserItems";
 import ItemIcon from './components/ItemIcon';
 import updateItem from '../../../../services/updateItem';
 import Modal from 'react-modal';
@@ -25,6 +25,7 @@ const UpdateModal: FC<IUpdateModal> = ({ item }) => {
       </button>
       <Modal
         className="modal"
+        appElement={document.getElementById('app')}
         isOpen={showModal}
         onRequestClose={() => setShowModal(false)}
         contentLabel="Example Modal"
@@ -34,17 +35,21 @@ const UpdateModal: FC<IUpdateModal> = ({ item }) => {
           placeholder="new password"
           className="input"
           value={newPass}
-          onChange={(event) => setNewPass(event.target.value)} 
+          onChange={(event) => setNewPass(event.target.value)}
         />
         <div className="pt-12px text-center">
-          <button className="button" onClick={async () => {
-            await updateItem({
-              ...item,
-              password: newPass,
-            })
-
-            window.location.reload();
-          }}>Change</button>
+          <button
+            className="button"
+            disabled={!newPass}
+            onClick={async () => {
+              if (newPass) {
+                await updateItem({
+                  ...item,
+                  password: newPass,
+                })
+              }
+              setShowModal(false);
+            }}>Change</button>
           <button className="button ml-12px" onClick={() => {
             setNewPass('');
             setShowModal(false)
@@ -57,12 +62,12 @@ const UpdateModal: FC<IUpdateModal> = ({ item }) => {
   );
 }
 
-const List: FC<IList> = ({items}) => (
+const List: FC<IList> = ({ items }) => (
   <ul className="list">
     {
       items.map((item) => (
-        <li className="item">
-          <ItemIcon title={item.title}/>
+        <li className="item" key={item.id}>
+          <ItemIcon title={item.title} />
           <div>
             <div className="title">
               {item.title}
