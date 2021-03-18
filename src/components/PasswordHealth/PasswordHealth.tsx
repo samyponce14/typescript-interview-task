@@ -1,4 +1,5 @@
-import { Route, Switch } from "react-router-dom";
+import {FC} from 'react';
+import { Route, Switch } from 'react-router-dom';
 import { Routes } from '~/constants';
 import Header from './components/Header/Header';
 import Filter from './components/Filter/Filter';
@@ -7,11 +8,11 @@ import ErrorBlock from '../ErrorBlock';
 import LoadingScreen from '../LoadingScreen';
 import useItemsProvider from './useItemsProvider';
 import { useUserContext } from '../UserContext';
-import itemHasWeakPassword from "~/utils/itemHasWeakPassword";
-import itemHasReusedPassword from "~/utils/itemHasReusedPassword";
-import itemHasOldPassword from "~/utils/itemHasOldPassword";
+import itemHasWeakPassword from '~/utils/itemHasWeakPassword';
+import itemHasReusedPassword from '~/utils/itemHasReusedPassword';
+import itemHasOldPassword from '~/utils/itemHasOldPassword';
 
-const PasswordHealth = () => {
+const PasswordHealth: FC = () => {
   const {
     errorMessage: userProviderErrorMessage,
     isLoading: userDataIsLoading,
