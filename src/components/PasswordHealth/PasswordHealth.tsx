@@ -1,15 +1,15 @@
-import List from './components/List/List';
-import useItemsProvider from './useItemsProvider';
-import ErrorBlock from '../ErrorBlock';
-import Filter from './components/Filter/Filter';
-import LoadingScreen from '../LoadingScreen';
-import Header from './components/Header/Header';
 import { Route, Switch } from "react-router-dom";
 import { Routes } from '~/constants';
+import Header from './components/Header/Header';
+import Filter from './components/Filter/Filter';
+import List from './components/List/List';
+import ErrorBlock from '../ErrorBlock';
+import LoadingScreen from '../LoadingScreen';
+import useItemsProvider from './useItemsProvider';
+import { useUserContext } from '../UserContext';
 import itemHasWeakPassword from "~/utils/itemHasWeakPassword";
 import itemHasReusedPassword from "~/utils/itemHasReusedPassword";
 import itemHasOldPassword from "~/utils/itemHasOldPassword";
-import { useUserContext } from '../UserContext';
 
 const PasswordHealth = () => {
   const {
