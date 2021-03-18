@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { Routes } from '~/constants';
 import login from '~/services/login';
 import ErrorBlock from '../ErrorBlock';
+import LoadingScreen from '../LoadingScreen';
 
 import './login-style.scss';
 
@@ -13,6 +14,7 @@ const Login = () => {
   const [errorMessage, setErrorMessage] = useState<string>();
   const [usernameError, setUsernameError] = useState<string>();
   const [passwordError, setPasswordError] = useState<string>();
+  const [isLoading, setIsLoading] = useState(false);
 
   const requiredValidator = (value?: string) => {
     return !value;
@@ -24,13 +26,21 @@ const Login = () => {
     setUsernameError(null);
     setPasswordError(null);
 
+    setIsLoading(true);
+
     try {
       await login(username, password);
+      setIsLoading(false);
       push(Routes.PasswordHealth);
     } catch (error) {
+      setIsLoading(false);
       setErrorMessage(error.message);
     }
   };
+
+  if (isLoading) {
+    return <LoadingScreen />
+  }
 
   const validateForm = () => {
     return requiredValidator(username) && requiredValidator(username);
