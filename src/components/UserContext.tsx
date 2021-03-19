@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState, FC } from 'react';
-import { API } from '~/constants';
-import getUrl from '~/utils/getUrl';
+import { useHistory } from 'react-router-dom';
+import { Routes } from '~/constants';
+import getUser from '~/services/getUser';
 
 interface IUser {
   updateUser: () => void;
@@ -31,24 +32,23 @@ export const UserContextProvider: FC = ({ children }) => {
   const [email, setEmail] = useState<string>(null);
   const [id, setId] = useState<string>(null);
 
+  const { push } = useHistory();
+
   const updateUser = async (): Promise<void> => {
     setErrorMessage(null);
     setIsLoading(true);
 
     try {
-      const response = await fetch(getUrl(API.User), {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        }
-      });
 
-      const data = await response.json();
+      const data = await getUser();
 
       setUsername(data?.username);
       setEmail(data?.email);
       setId(data?.id);
+
     } catch (error) {
       setErrorMessage(error.message);
+      push(Routes.Login);
     }
 
     setIsLoading(false);
