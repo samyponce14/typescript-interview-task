@@ -1,7 +1,7 @@
 import { SyntheticEvent, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Routes } from '~/constants';
-import login from '~/services/login';
+import { Routes } from '../../constants';
+import login from '../../services/login';
 import ErrorBlock from '../ErrorBlock';
 import LoadingScreen from '../LoadingScreen';
 
@@ -69,7 +69,7 @@ const Login = () => {
           Password Health
         </h1>
         <input
-          className={"input mt-52px " + (usernameError ? 'input-error' : null)}
+          className={'input mt-52px ' + (usernameError ? 'input-error' : null)}
           value={username}
           onChange={(event) => setUsername(event.target.value)}
           onBlur={() => validateUsername()}
@@ -78,7 +78,7 @@ const Login = () => {
         />
         <ErrorBlock error={usernameError} />
         <input
-          className={"input mt-24px " + (passwordError ? 'input-error' : null)}
+          className={'input mt-24px ' + (passwordError ? 'input-error' : null)}
           value={password}
           onChange={(event) => setPassword(event.target.value)}
           onBlur={() => validatePassword()}
