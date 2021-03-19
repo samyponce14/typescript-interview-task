@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoadingScreen renders LoadingScreen 1`] = `
+<div
+  className="loading-screen"
+>
+  Loading...
+</div>
+`;
