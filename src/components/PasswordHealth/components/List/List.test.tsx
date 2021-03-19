@@ -77,14 +77,8 @@ const testProps = {
   ]
 }
 
-jest.mock('react-router-dom', () => ({
-  useHistory: () => ({
-    push: jest.fn(),
-  }),
-}));
-
-describe('Header', () => {
-  test('renders Header', () => {
+describe('List', () => {
+  test('renders List', () => {
     const tree = renderer.create(<List {...testProps} />);
     expect(tree).toMatchSnapshot();
   });

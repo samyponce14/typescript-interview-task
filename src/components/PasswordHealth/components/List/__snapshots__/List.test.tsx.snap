@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Header renders Header 1`] = `
+exports[`List renders List 1`] = `
 <ul
   className="list"
 >
