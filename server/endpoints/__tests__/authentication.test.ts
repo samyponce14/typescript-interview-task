@@ -1,6 +1,9 @@
-const { app, server } = require('../server');
-const supertest = require('supertest');
+import supertest from 'supertest';
+import app from '../server';
+
 const request = supertest(app);
+
+let server = app.listen(3000);
 
 let token = '';
 

@@ -1,11 +1,18 @@
-const express = require('express');
-const app = express();
+import express from 'express';
+import bodyParser from 'body-parser';
 import authentication from './authentication';
 import items from './items';
 
-var server = app.listen(3000);
+const app = express();
+
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+
+app.use(bodyParser.json());
+
 // routes
 app.use(authentication);
 app.use(items);
 
-module.exports = { app, server }
+export default app;
