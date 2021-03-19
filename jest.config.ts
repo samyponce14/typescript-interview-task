@@ -11,7 +11,8 @@ const config: Config.InitialOptions = {
     },
   },
   moduleNameMapper: {
-    '^.+\\.(css|less|scss)$': 'babel-jest'
+    '^.+\\.(css|less|scss)$': 'babel-jest',
+    '~(.*)$': '<rootDir>/src/$1',
   }
 };
 
