@@ -1,8 +1,8 @@
 import { FC, SyntheticEvent, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { IItem } from "~/services/getUserItems";
+import { IItem } from '~/services/getUserItems';
 import { Routes } from '~/constants';
-import logout from '../../../../services/logout';
+import logout from '~/services/logout';
 
 import './header-style.scss';
 
@@ -13,7 +13,7 @@ interface IHeader {
 
 const Header: FC<IHeader> = ({ items, username }) => {
   const { push } = useHistory();
-  const [errorMessage, setErrorMessage] = useState<string>();
+  const [, setErrorMessage] = useState<string>();
 
   const handleClick = async (event: SyntheticEvent<HTMLButtonElement>) => {
     event.preventDefault();
