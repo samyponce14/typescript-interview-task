@@ -1,4 +1,3 @@
-import React from 'react';
 import renderer from 'react-test-renderer';
 
 import Login from './Login';
@@ -10,7 +9,7 @@ jest.mock('react-router-dom', () => ({
 }));
 
 describe('Login', () => {
-  it('renders Login', () => {
+  test('renders Login', () => {
     const tree = renderer.create(<Login />);
     expect(tree).toMatchSnapshot();
   });
