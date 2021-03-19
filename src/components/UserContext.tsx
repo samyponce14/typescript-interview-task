@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState, FC } from 'react';
 import { API } from '~/constants';
 import getUrl from '~/utils/getUrl';
 
@@ -13,8 +13,8 @@ interface IUser {
 }
 
 const UserContext = createContext<IUser>({
-  updateUser: () => {},
-  deleteData: () => {},
+  updateUser: () => { },
+  deleteData: () => { },
   errorMessage: null,
   isLoading: true,
   username: null,
@@ -24,14 +24,14 @@ const UserContext = createContext<IUser>({
 
 export const useUserContext = () => useContext(UserContext);
 
-export const UserContextProvider = ({ children }) => {
+export const UserContextProvider: FC = ({ children }) => {
   const [errorMessage, setErrorMessage] = useState<string>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [username, setUsername] = useState<string>(null);
   const [email, setEmail] = useState<string>(null);
   const [id, setId] = useState<string>(null);
 
-  const updateUser = async () => {
+  const updateUser = async (): Promise<void> => {
     setErrorMessage(null);
     setIsLoading(true);
 
@@ -54,7 +54,7 @@ export const UserContextProvider = ({ children }) => {
     setIsLoading(false);
   }
 
-  const deleteData = () => {
+  const deleteData = (): void => {
     setErrorMessage(null);
     setIsLoading(false);
     setUsername(null);
@@ -63,7 +63,11 @@ export const UserContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
-   updateUser();
+    const abortController = new AbortController();
+    updateUser();
+    return () => {
+      abortController.abort();
+    };
   }, []);
 
   const value = {
