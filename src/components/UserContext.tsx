@@ -1,6 +1,7 @@
-import { createContext, useContext, useEffect, useState } from 'react';
-import { API } from '~/constants';
-import getUrl from '~/utils/getUrl';
+import { createContext, useContext, useEffect, useState, FC } from 'react';
+import { useHistory } from 'react-router-dom';
+import { Routes } from '~/constants';
+import getUser from '~/services/getUser';
 
 interface IUser {
   updateUser: () => void;
@@ -13,8 +14,8 @@ interface IUser {
 }
 
 const UserContext = createContext<IUser>({
-  updateUser: () => {},
-  deleteData: () => {},
+  updateUser: () => { },
+  deleteData: () => { },
   errorMessage: null,
   isLoading: true,
   username: null,
@@ -24,37 +25,36 @@ const UserContext = createContext<IUser>({
 
 export const useUserContext = () => useContext(UserContext);
 
-export const UserContextProvider = ({ children }) => {
+export const UserContextProvider: FC = ({ children }) => {
   const [errorMessage, setErrorMessage] = useState<string>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [username, setUsername] = useState<string>(null);
   const [email, setEmail] = useState<string>(null);
   const [id, setId] = useState<string>(null);
 
-  const updateUser = async () => {
+  const { push } = useHistory();
+
+  const updateUser = async (): Promise<void> => {
     setErrorMessage(null);
     setIsLoading(true);
 
     try {
-      const response = await fetch(getUrl(API.User), {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        }
-      });
 
-      const data = await response.json();
+      const data = await getUser();
 
       setUsername(data?.username);
       setEmail(data?.email);
       setId(data?.id);
+
     } catch (error) {
       setErrorMessage(error.message);
+      push(Routes.Login);
     }
 
     setIsLoading(false);
   }
 
-  const deleteData = () => {
+  const deleteData = (): void => {
     setErrorMessage(null);
     setIsLoading(false);
     setUsername(null);
@@ -63,7 +63,11 @@ export const UserContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
-   updateUser();
+    const abortController = new AbortController();
+    updateUser();
+    return () => {
+      abortController.abort();
+    };
   }, []);
 
   const value = {

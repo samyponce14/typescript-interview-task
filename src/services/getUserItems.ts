@@ -1,7 +1,8 @@
-import {API} from "~/constants";
-import getUrl from "~/utils/getUrl";
+import { API } from '~/constants';
+import getUrl from '~/utils/getUrl';
 
 export interface IItem {
+  id: string,
   title: string,
   description: string,
   password: string,

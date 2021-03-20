@@ -10,6 +10,10 @@ const config: Config.InitialOptions = {
       isolatedModules: true,
     },
   },
+  moduleNameMapper: {
+    '^.+\\.(css|less|scss)$': 'babel-jest',
+    '~(.*)$': '<rootDir>/src/$1',
+  }
 };
 
 export default config;

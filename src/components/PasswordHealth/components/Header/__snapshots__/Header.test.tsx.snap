@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header renders Header 1`] = `
+<div
+  className="header"
+>
+  <div
+    className="user-section"
+  >
+    <button
+      onClick={[Function]}
+    >
+      Logout admin
+    </button>
+  </div>
+  <h1>
+    10 Items are vulnerable
+  </h1>
+  <span>
+    Create new complex passwords to protect your accounts
+  </span>
+</div>
+`;

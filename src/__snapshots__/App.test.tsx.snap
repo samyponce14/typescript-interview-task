@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App renders App 1`] = `
+<div
+  className="login-page"
+>
+  <form
+    className="login-form"
+    onSubmit={[Function]}
+  >
+    <h1
+      className="text-center"
+    >
+      Password Health
+    </h1>
+    <input
+      className="input mt-52px null"
+      onBlur={[Function]}
+      onChange={[Function]}
+      placeholder="Username"
+      type="text"
+      value=""
+    />
+    <input
+      className="input mt-24px null"
+      onBlur={[Function]}
+      onChange={[Function]}
+      placeholder="Password"
+      type="password"
+      value=""
+    />
+    <button
+      className="button mt-24px"
+      disabled={true}
+      type="submit"
+    >
+      Login
+    </button>
+  </form>
+</div>
+`;
